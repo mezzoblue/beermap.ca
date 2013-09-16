@@ -1,0 +1,187 @@
+@import url(http://fonts.googleapis.com/css?family=Julius+Sans+One);
+
+
+/* mini-reset */
+body, h1, ul, li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+
+body {
+	font: 15px sans-serif;
+	background: #94c5c0;
+}
+
+
+/* header */
+
+.site-header {
+	font-size: 1.2em;
+	width: 100%;
+	height: 100px;
+	background: #fff;
+}
+
+	.site-title {
+		padding: 7px 0 7px 40px;
+		background: url(../images/logo-pint.png) no-repeat;
+		background-size: 32px;
+		font-family: 'Julius Sans One', sans-serif;
+		text-transform: uppercase;
+	}
+
+	.nav-item {
+		display: inline-block;
+		padding: 0;
+		margin: 0 30px 0 0;
+		line-height: 1;
+		list-style: none;
+	}
+	.nav-link {
+		display: inline-block;
+		padding: 7px 10px 5px 10px;
+		border-radius: 4px;
+		color: #999;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	.nav-link:hover, .nav-link:focus {
+		background: #f9f9f9;
+	}
+	.nav-link.active {
+		background: #eee;
+	}
+
+
+
+/* map styling */
+
+.map {
+	position: absolute;
+	top: 100px;
+	bottom: 0;
+	width: 100%;
+	z-index: 5;
+	}
+
+
+
+/* map popup styling */
+
+.leaflet-popup-content-wrapper {
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.15);
+	box-shadow: 0 1px 10px rgba(0,0,0,0.15);
+}
+
+	.map-popup h2 {
+		font-size: 15px;
+		margin: 0 0 0.25em 0;
+	}
+	.map-popup h2 a {
+		text-decoration: none;
+	}
+	.map-popup h2 a:hover, .map-popup h2 a:focus {
+		text-decoration: underline;
+	}
+	.map-popup li {
+		font-size: 15px;
+		list-style: none;
+	}
+	li.note {
+		font-style: italic;
+		margin: 0.75em 0;
+	}
+	li.extra {
+		margin-top: 1em;
+	}
+	li.extra .twitter, li.extra .fb {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		margin: 0 10px 0 0;
+		background: url(../images/ico-twitter.png);
+		text-indent: -999px;
+		text-decoration: none;
+		overflow: hidden;
+	}
+li.extra .fb {
+		background: url(../images/ico-fb.png);
+	}
+li.extra .type {
+	color: #c3c3c3;
+	}
+li.closed {
+	margin-top: 1em;
+	color: #c3c3c3;
+	font-size: 12px;
+	}
+
+
+
+/* map legend styling */
+
+.map-legend {
+	z-index: 10;
+	padding: 5px 0;
+	margin-left: 50px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.5);
+}
+	.map-legend li {
+		display: inline-block;
+		margin: 0 5px;
+	}
+	.map-legend img {
+		vertical-align: middle;
+	}
+
+
+
+
+
+/* small tablet / mobile layout */
+@media all and (max-width: 767px) {
+
+	.site-header {
+		text-align: center;
+	}
+	.site-title {
+		display: inline-block;
+		margin: 10px 0;
+	}
+	.site-nav {
+		display: block;
+	}
+
+	.map-legend {
+		position: fixed;
+		margin: 2px 50px 0 50px;
+	}
+
+}
+
+
+
+/* desktop layout */
+@media all and (min-width: 768px) {
+
+	.site-title {
+		position: absolute;
+		top: 33px;
+		left: 30px;
+	}
+	.site-nav {
+		position: absolute;
+		top: 33px;
+		right: 0;
+	}
+
+	.map-legend {
+		position: fixed;
+		top: 110px;
+		right: 10px;
+	}
+}
