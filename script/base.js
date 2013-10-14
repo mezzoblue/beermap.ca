@@ -63,7 +63,7 @@ var rumourLayer = L.mapbox.markerLayer()
     .loadURL('../canadian-craft-breweries/upcoming-rumoured.geojson');
 
 var defunctLayer = L.mapbox.markerLayer()
-    .loadURL('../canadian-craft-breweries/play.geojson');
+    .loadURL('../canadian-craft-breweries/defunct.geojson');
 
 // then set one for default load
 var currentLayer = mainLayer;
