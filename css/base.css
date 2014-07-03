@@ -32,7 +32,7 @@ body {
 	text-align: center;
 }
 	.site-title {
-		padding: 7px 0 7px 40px;
+		padding: 7px 0 7px 22px;
 		background: url(../images/logo-pint.png) no-repeat;
 		background-size: 32px;
 		font-family: 'Julius Sans One', sans-serif;
@@ -49,7 +49,7 @@ body {
 
 	.nav-item {
 		display: block;
-		padding: 5px;
+		padding: 1px 0;
 		margin: 0;
 		line-height: 1;
 		text-align: left;
@@ -67,7 +67,8 @@ body {
 		background: #f9f9f9;
 	}
 	.nav-link.active {
-		background: #eee;
+		color: #777;
+		background: #ddd;
 	}
 
 
@@ -75,15 +76,15 @@ body {
 /* map legend */
 
 .map-legend {
+	padding: 10px 0 0 0;
 	border-top: solid 1px #ddd;
-	padding: 40px 0 0 0;
-
 	text-align: left;
 }
 	.map-legend li {
 		display: block;
 		padding: 5px 0;
 		margin: 0;
+		color: #999;
 	}
 	.map-legend img {
 		vertical-align: middle;
@@ -260,6 +261,14 @@ li.closed {
 	.nav-link {
 		display: block;
 		padding: 14px 20px 12px 20px;
+	}
+
+	.map-legend {
+		padding-top: 40px;
+	}
+	.map-legend li {
+		display: block;
+		padding-left: 27px;
 	}
 
 	.leaflet-left .leaflet-control {
