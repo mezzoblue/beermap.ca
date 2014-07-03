@@ -2,7 +2,10 @@
 
 
 /* mini-reset */
-body, h1, ul, li {
+* {
+	box-sizing: border-box;
+}
+body, h1, ul, li, p {
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -10,7 +13,7 @@ body, h1, ul, li {
 
 
 body {
-	font: 15px sans-serif;
+	font: 1rem sans-serif;
 	background: #94c5c0;
 }
 
@@ -18,12 +21,16 @@ body {
 /* header */
 
 .site-header {
-	font-size: 1.2em;
-	width: 100%;
-	height: 100px;
-	background: #fff;
-}
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
 
+	padding: 10px 10px 6rem 10px;
+	background: #fff;
+
+	text-align: center;
+}
 	.site-title {
 		padding: 7px 0 7px 40px;
 		background: url(../images/logo-pint.png) no-repeat;
@@ -32,16 +39,25 @@ body {
 		text-transform: uppercase;
 	}
 
+
+
+/* navigation styling */
+
+.site-nav {
+	padding: 0;
+}
+
 	.nav-item {
-		display: inline-block;
-		padding: 0;
-		margin: 0 30px 0 0;
+		display: block;
+		padding: 5px;
+		margin: 0;
 		line-height: 1;
+		text-align: left;
 		list-style: none;
 	}
 	.nav-link {
-		display: inline-block;
-		padding: 7px 10px 5px 10px;
+		display: block;
+		padding: 11px 5px 9px 5px;
 		border-radius: 4px;
 		color: #999;
 		text-decoration: none;
@@ -56,15 +72,63 @@ body {
 
 
 
+/* map legend */
+
+.map-legend {
+	border-top: solid 1px #ddd;
+	padding: 40px 0 0 0;
+
+	text-align: left;
+}
+	.map-legend li {
+		display: block;
+		padding: 5px 0;
+		margin: 0;
+	}
+	.map-legend img {
+		vertical-align: middle;
+		margin-right: 6px;
+	}
+
+/* site credits */
+
+.site-credits {
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+
+	width: 100%;
+
+	color: #bbb;
+	font-size: 0.8rem;
+	text-align: center;
+}
+	.site-credits p {
+		margin: 10px 0;
+	}
+	.site-credits a:link, .site-credits a:visited {
+		color: #bbb;
+	}
+
+
+
+/* map zoom controls */
+
+.leaflet-top .leaflet-control {
+	margin-top: 20px;
+}
+
+
 /* map styling */
 
 .map {
 	position: absolute;
-	top: 100px;
+	top: 0;
 	bottom: 0;
 	width: 100%;
+	height: 100%;
 	z-index: 5;
-	}
+}
 
 
 
@@ -78,7 +142,7 @@ body {
 
 	.map-popup h2 {
 		font-size: 15px;
-		margin: 0 0 0.25em 0;
+		margin: 0 0 0.25rem 0;
 	}
 	.map-popup h2 a {
 		text-decoration: none;
@@ -92,10 +156,10 @@ body {
 	}
 	li.note {
 		font-style: italic;
-		margin: 0.75em 0;
+		margin: 0.75rem 0;
 	}
 	li.extra {
-		margin-top: 1em;
+		margin-top: 1rem;
 	}
 	li.extra .twitter, li.extra .fb {
 		display: inline-block;
@@ -114,29 +178,11 @@ li.extra .type {
 	color: #c3c3c3;
 	}
 li.closed {
-	margin-top: 1em;
+	margin-top: 1rem;
 	color: #c3c3c3;
 	font-size: 12px;
 	}
 
-
-
-/* map legend styling */
-
-.map-legend {
-	z-index: 10;
-	padding: 5px 0;
-	margin-left: 50px;
-	border-radius: 4px;
-	background: rgba(255, 255, 255, 0.5);
-}
-	.map-legend li {
-		display: inline-block;
-		margin: 0 5px;
-	}
-	.map-legend img {
-		vertical-align: middle;
-	}
 
 
 
@@ -145,43 +191,79 @@ li.closed {
 /* small tablet / mobile layout */
 @media all and (max-width: 767px) {
 
-	.site-header {
-		text-align: center;
-	}
-	.site-title {
-		display: inline-block;
-		margin: 10px 0;
-	}
-	.site-nav {
-		display: block;
+	body {
+		font-size: 0.8rem;
 	}
 
-	.map-legend {
+	.site-header {
+		min-width: 180px;
+		max-width: 240px;
+		min-height: 100%;
+	}
+
+	.site-title {
+		padding-left: 0;
+		background: none;
+	}
+
+	.leaflet-top .leaflet-control {
+		margin-top: 5px;
+	}
+	.leaflet-left .leaflet-control {
 		position: fixed;
-		margin: 2px 50px 0 50px;
+		right: 5px;
+	}
+
+	.map-legend img {
+		vertical-align: middle;
+		margin-right: 0;
+		display: inline-block;
+		width: 11px;
+		height: 11px;
 	}
 
 }
 
 
 
+/* mobile layout */
+@media all and (max-width: 480px) {
+
+	.site-header {
+		max-width: 120px;
+		min-width: 0;
+	}
+
+}
+
+
 /* desktop layout */
 @media all and (min-width: 768px) {
 
-	.site-title {
-		position: absolute;
-		top: 33px;
-		left: 30px;
-	}
-	.site-nav {
-		position: absolute;
-		top: 33px;
-		right: 0;
+	.site-header {
+		top: 20px;
+		left: 20px;
+		width: 280px;
+		min-height: 90%;
+		border-radius: 8px;
+
+		font-size: 1.2rem;
 	}
 
-	.map-legend {
-		position: fixed;
-		top: 110px;
-		right: 10px;
+
+	.site-nav {
+		padding: 30px 0;
 	}
+	.nav-item {
+		padding: 5px 10px;
+	}
+	.nav-link {
+		display: block;
+		padding: 14px 20px 12px 20px;
+	}
+
+	.leaflet-left .leaflet-control {
+		margin-left: 310px;
+	}
+
 }
