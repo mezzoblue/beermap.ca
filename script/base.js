@@ -53,15 +53,6 @@ function removeClass(elem, className) {
 // setView: [lat, long], zoom level 
 var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
 
-// fitBounds: [lat, long], [lat, long]
-// var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').fitBounds(
-//     [60.846, -135.312], 
-//     [41.436, -52.317]
-//     );
-
-
-
-
 // load each data file into its own marker layer
 var mainLayer = L.mapbox.markerLayer()
     .loadURL('../canadian-craft-breweries/canadian-craft-breweries.geojson');
@@ -77,6 +68,21 @@ var currentLayer = mainLayer;
 toggleLayers(currentLayer);
 
 
+// set default UI clearance value for desktop
+var clearUI = 300;
+
+// test for smaller breakpoints, vary UI clearance
+var mq1 = window.matchMedia( "(max-width: 768px)" );
+if (mq1.matches) {
+    clearUI = 180;
+}
+var mq2 = window.matchMedia( "(max-width: 480px)" );
+if (mq2.matches) {
+    clearUI = 120;
+}
+
+
+
 // then resize map to fit
 currentLayer.on('ready', function() {
     // currentLayer.getBounds() returns the corners of the furthest-out markers,
@@ -86,7 +92,7 @@ currentLayer.on('ready', function() {
         {
             // preserves the space from the left of the real map to account
             // for UI layer
-            paddingTopLeft: [300, 0]
+            paddingTopLeft: [clearUI, 0]
         }
         );
 });
