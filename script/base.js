@@ -20,6 +20,7 @@
 // setView: [lat, long], zoom level 
 var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
 
+var mapIcons = setMediumIcons();
 
 
 
@@ -109,6 +110,30 @@ var geoJsonLayer = L.geoJson(myObject, {
 
         // whew, let's add it.
         layer.bindPopup(popupContent);
+
+
+        var marker = layer,
+            feature = marker.feature;
+
+
+        // customize markers based on type
+        if (feature.properties.Type == "Brewery") {
+            marker.setIcon(mapIcons.brewery);
+        } else if (feature.properties.Type == "Brewpub") {
+            marker.setIcon(mapIcons.brewpub);
+        } else if (feature.properties.Type == "Nanobrewery") {
+            marker.setIcon(mapIcons.nano);
+        } else if (feature.properties.Type == "Unknown") {
+            marker.setIcon(mapIcons.unknown);
+        } else if (
+            (feature.properties.Type == "Brewpub Chain") ||
+            (feature.properties.Type == "Contract Brewer") ||
+            (feature.properties.Type == "Gypsy Brewer") ||
+            (feature.properties.Type == "Training Brewery")
+            ) {
+            marker.setIcon(mapIcons.other);
+        }
+
 
     }
 
