@@ -44,6 +44,21 @@ body {
 
 /* navigation styling */
 
+.site-header, .nav-collapse, .map .leaflet-top {
+	-webkit-transition: -webkit-transform 0.25s ease-out;
+	-moz-transition: -moz-transform 0.25s ease-out;
+	transition: transform 0.25s ease-out;
+}
+	.site-header.collapsed, .nav-collapse.collapsed, .map.collapsed .leaflet-top {
+		-webkit-transition: -webkit-transform 0.25s ease-out;
+		-moz-transition: -moz-transform 0.25s ease-out;
+		transition: transform 0.25s ease-out;
+
+		-webkit-transform: translate(-300px, 0);
+		-moz-transform: translate(-300px, 0);
+		transform: translate(-300px, 0);
+	}
+
 .site-nav {
 	padding: 0;
 }
@@ -72,6 +87,27 @@ body {
 		background: #ddd;
 	}
 
+.nav-collapse {
+	position: absolute;
+	z-index: 100;
+	top: 90px;
+	left: 310px;
+	width: 28px;
+	height: 28px;
+	border: solid 1px #ccc;
+	border-radius: 2px;
+	color: #000;
+	background: #fff;
+	text-align: center;
+
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+	.nav-collapse:hover {
+		background: #f4f4f4;
+	}
 
 
 /* map legend */
@@ -221,6 +257,10 @@ li.closed {
 	.site-header {
 		width: 180px;
 		min-height: 100%;
+
+		-webkit-transition: -webkit-transform 0.15s ease-out;
+		-moz-transition: -moz-transform 0.15s ease-out;
+		transition: transform 0.15s ease-out;
 	}
 
 	.map {
@@ -230,6 +270,23 @@ li.closed {
 		height: 100%;
 		padding-left: 180px;
 		z-index: 5;
+	}
+
+
+	.nav-collapse {
+		top: 70px;
+		left: auto;
+		right: 5px;
+	}
+	.site-header.collapsed {
+		-webkit-transform: translate(-180px, 0);
+		-moz-transform: translate(-180px, 0);
+		transform: translate(-180px, 0);
+	}
+	.nav-collapse.collapsed, .map.collapsed .leaflet-top {
+		-webkit-transform: none;
+		-moz-transform: none;
+		transform: none;
 	}
 
 
@@ -264,7 +321,16 @@ li.closed {
 	.site-header {
 		max-width: 120px;
 		min-width: 0;
+
+		-webkit-transition: -webkit-transform 0.1s ease-out;
+		-moz-transition: -moz-transform 0.1s ease-out;
+		transition: transform 0.1s ease-out;
 	}
+	.site-header.collapsed {
+		-webkit-transform: translate(-120px, 0);
+		-moz-transform: translate(-120px, 0);
+		transform: translate(-120px, 0);
+	}	
 
 	.map {
 		padding-left: 120px;

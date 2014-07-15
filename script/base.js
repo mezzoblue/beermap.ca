@@ -225,7 +225,6 @@ document.getElementById('nav-main').onclick = function() {
         toggleClass(this, 'active');
     }
 };
-
 document.getElementById('nav-rumours').onclick = function() {
     if (this.className === 'active') {
         // return(false);
@@ -240,7 +239,6 @@ document.getElementById('nav-rumours').onclick = function() {
         toggleClass(this, 'active');
     }
 };
-
 document.getElementById('nav-defunct').onclick = function() {
     if (this.className === 'active') {
         // return(false);
@@ -255,6 +253,23 @@ document.getElementById('nav-defunct').onclick = function() {
         toggleClass(this, 'active');
     }
 };
+
+
+// add collapse widget
+var navPanel = document.getElementById('site-header');
+addHTML(navPanel, "<div class='nav-collapse' id='nav-collapse'>*</div>", "beforebegin");
+
+// wire up collapse widget click handler
+document.getElementById('nav-collapse').onclick = function() {
+
+    siteNav = document.getElementById('site-header');
+    map = document.getElementById('map');
+
+    toggleClass(map, 'collapsed')
+    toggleClass(siteNav, 'collapsed')
+    toggleClass(this, 'collapsed');
+
+}
 
 
 
