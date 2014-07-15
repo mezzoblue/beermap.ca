@@ -12,39 +12,6 @@
 
 
 
-// jQuery replacement functions
-// taken from http://toddmotto.com/creating-jquery-style-functions-in-javascript-hasclass-addclass-removeclass-toggleclass/
-function hasClass(elem, className) {
-    return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-}
-function toggleClass(elem, className) {
-    var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ' ) + ' ';
-    if (hasClass(elem, className)) {
-        while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-            newClass = newClass.replace( ' ' + className + ' ' , ' ' );
-        }
-        elem.className = newClass.replace(/^\s+|\s+$/g, '');
-    } else {
-        elem.className += ' ' + className;
-    }
-}
-function removeClass(elem, className) {
-    var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
-    if (hasClass(elem, className)) {
-        while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-            newClass = newClass.replace(' ' + className + ' ', ' ');
-        }
-        elem.className = newClass.replace(/^\s+|\s+$/g, '');
-    }
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -54,8 +21,24 @@ function removeClass(elem, className) {
 var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
 
 // load each data file into its own marker layer
-var mainLayer = L.mapbox.markerLayer()
-    .loadURL('../canadian-craft-breweries/canadian-craft-breweries.geojson');
+var mainLayer = L.markerClusterGroup();
+
+function readJSON(file) {
+    var request = new XMLHttpRequest();
+    request.open('GET', file, false);
+    request.send(null);
+    if (request.status == 200)
+        return request.responseText;
+};
+
+var myObject = JSON.parse(readJSON('../canadian-craft-breweries/canadian-craft-breweries.geojson'));
+var geoJsonLayer = L.geoJson(myObject);
+ mainLayer.addLayer(geoJsonLayer);
+ map.addLayer(mainLayer);
+
+// mainLayer.loadURL('../canadian-craft-breweries/canadian-craft-breweries.geojson');
+
+
 
 var rumourLayer = L.mapbox.markerLayer()
     .loadURL('../canadian-craft-breweries/upcoming-rumoured.geojson');
@@ -114,8 +97,8 @@ function cleanNav() {
 
 
 
-// click handlers for the nav
 
+// click handlers for the nav
 document.getElementById('nav-main').onclick = function() {
     if (this.className === 'active') {
         // return(false);
@@ -160,8 +143,6 @@ document.getElementById('nav-defunct').onclick = function() {
         toggleClass(this, 'active');
     }
 };
-
-
 
 
 
