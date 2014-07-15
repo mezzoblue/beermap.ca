@@ -197,10 +197,19 @@ li.closed {
 	}
 
 	.site-header {
-		min-width: 180px;
-		max-width: 240px;
+		width: 180px;
 		min-height: 100%;
 	}
+
+	.map {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		height: 100%;
+		padding-left: 180px;
+		z-index: 5;
+	}
+
 
 	.site-title {
 		padding-left: 0;
@@ -235,6 +244,10 @@ li.closed {
 		min-width: 0;
 	}
 
+	.map {
+		padding-left: 120px;
+	}
+
 }
 
 
@@ -250,7 +263,6 @@ li.closed {
 
 		font-size: 1.2rem;
 	}
-
 
 	.site-nav {
 		padding: 30px 0;

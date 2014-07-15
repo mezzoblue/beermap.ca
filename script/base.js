@@ -4,7 +4,6 @@
 // list of breweries
 // show & hide list of breweries
 // nav permalinks
-// credits, cc, github links
 // logo
 
 // zoom styling
@@ -50,7 +49,8 @@ function removeClass(elem, className) {
 
 
 // create map object
-var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d');
+// setView: [lat, long], zoom level 
+var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
 
 
 
