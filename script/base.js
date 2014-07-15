@@ -35,7 +35,7 @@ var mainLayer = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
         return new L.DivIcon({ html: 
 
-            '<div>' + cluster.getChildCount() + '</div>'
+            '<div class="map-cluster">' + cluster.getChildCount() + '</div>'
 
         });
         addMarkers(cluster);
