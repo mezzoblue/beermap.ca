@@ -12,38 +12,6 @@
 
 
 
-// jQuery replacement functions
-// taken from http://toddmotto.com/creating-jquery-style-functions-in-javascript-hasclass-addclass-removeclass-toggleclass/
-function hasClass(elem, className) {
-    return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-}
-function toggleClass(elem, className) {
-    var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ' ) + ' ';
-    if (hasClass(elem, className)) {
-        while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-            newClass = newClass.replace( ' ' + className + ' ' , ' ' );
-        }
-        elem.className = newClass.replace(/^\s+|\s+$/g, '');
-    } else {
-        elem.className += ' ' + className;
-    }
-}
-function removeClass(elem, className) {
-    var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
-    if (hasClass(elem, className)) {
-        while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-            newClass = newClass.replace(' ' + className + ' ', ' ');
-        }
-        elem.className = newClass.replace(/^\s+|\s+$/g, '');
-    }
-}
-
-
-
-
-
-
-
 
 
 
@@ -53,10 +21,137 @@ function removeClass(elem, className) {
 // setView: [lat, long], zoom level 
 var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
 
-// load each data file into its own marker layer
-var mainLayer = L.mapbox.markerLayer()
-    .loadURL('../canadian-craft-breweries/canadian-craft-breweries.geojson');
+var mapIcons = setMediumIcons();
 
+
+
+// -------------------------------------
+// clustergroup playground
+// (this is terrible hacking that just happens to work, needs serious refactoring)
+
+// loading markers as ClusterGroups
+var mainLayer = L.markerClusterGroup({
+
+    maxClusterRadius: 20,
+    showCoverageOnHover: false,
+
+    iconCreateFunction: function(cluster) {
+        return new L.DivIcon({ html: 
+
+            '<div class="map-cluster">' + cluster.getChildCount() + '</div>'
+
+        });
+        addMarkers(cluster);
+    }
+
+});
+
+function readJSON(file) {
+    var request = new XMLHttpRequest();
+    request.open('GET', file, false);
+    request.send(null);
+    if (request.status == 200)
+        return request.responseText;
+};
+
+// need to turn this into an init function
+var myObject = JSON.parse(readJSON('../canadian-craft-breweries/canadian-craft-breweries.geojson'));
+
+var geoJsonLayer = L.geoJson(myObject, {
+
+    onEachFeature: function(feature, layer) {
+
+        // Create custom popup content
+        // (this is super ugly)
+        var popupContent =  '<div class="map-popup">';
+
+        // title of brewery
+        if (feature.properties.URL) {
+            popupContent += '<h2><a class="main-link" href="' + feature.properties.URL  + '">' + feature.properties.Name + '</a></h2>';
+        } else {
+            popupContent += '<h2>' + feature.properties.Name + '</h2>';
+        }
+
+
+        popupContent +=     '   <ul>';
+
+        if (feature.properties.AKA) {
+            popupContent +=     '       <li class="aka">aka ' + feature.properties.AKA + '</li>';
+        }
+
+        popupContent +=     '       <li>' + feature.properties.City + ', ' + feature.properties.Province + '</li>';
+
+
+        // conditional extra information
+
+        if (feature.properties.Note) {
+            popupContent +=     '      <li class="note">' + feature.properties.Note  + '</li>';
+        }
+
+        popupContent +=     '      <li class="extra">';
+
+        if (feature.properties.Twitter) {
+            popupContent += '<a class="twitter" href="' + feature.properties.Twitter  + '">T</a>';
+        }
+        if (feature.properties.Facebook) {
+            popupContent += '<a class="fb" href="' + feature.properties.Facebook  + '">F</a>';
+        }
+        if ((feature.properties.Type) && (feature.properties.Type != "Unknown")) {
+            popupContent += '<span class="type">' + feature.properties.Type + '</span>';
+        }
+
+        popupContent +=     '      </li>';
+
+        if (feature.properties.Closed) {
+            popupContent +=     '      <li class="closed">Closed: ' + feature.properties.Closed  + '</li>';
+        }
+
+        popupContent +=     '   </ul>';
+        popupContent +=     '</div>';
+
+
+        // whew, let's add it.
+        layer.bindPopup(popupContent);
+
+
+        var marker = layer,
+            feature = marker.feature;
+
+
+        // customize markers based on type
+        if (feature.properties.Type == "Brewery") {
+            marker.setIcon(mapIcons.brewery);
+        } else if (feature.properties.Type == "Brewpub") {
+            marker.setIcon(mapIcons.brewpub);
+        } else if (feature.properties.Type == "Nanobrewery") {
+            marker.setIcon(mapIcons.nano);
+        } else if (feature.properties.Type == "Unknown") {
+            marker.setIcon(mapIcons.unknown);
+        } else if (
+            (feature.properties.Type == "Brewpub Chain") ||
+            (feature.properties.Type == "Contract Brewer") ||
+            (feature.properties.Type == "Gypsy Brewer") ||
+            (feature.properties.Type == "Training Brewery")
+            ) {
+            marker.setIcon(mapIcons.other);
+        }
+
+
+    }
+
+});
+
+mainLayer.addLayer(geoJsonLayer);
+map.addLayer(mainLayer);
+
+
+// -------------------------------------
+
+
+
+
+
+// load each data file into its own marker layer
 var rumourLayer = L.mapbox.markerLayer()
     .loadURL('../canadian-craft-breweries/upcoming-rumoured.geojson');
 
@@ -114,8 +209,8 @@ function cleanNav() {
 
 
 
-// click handlers for the nav
 
+// click handlers for the nav
 document.getElementById('nav-main').onclick = function() {
     if (this.className === 'active') {
         // return(false);
@@ -160,8 +255,6 @@ document.getElementById('nav-defunct').onclick = function() {
         toggleClass(this, 'active');
     }
 };
-
-
 
 
 
@@ -263,9 +356,6 @@ var mapIcons = setMediumIcons();
 
 // Add custom markers & popups to each using our custom feature properties
 
-mainLayer.on('layeradd', function(e) {
-	addMarkers(e);
-});
 rumourLayer.on('layeradd', function(e) {
 	addMarkers(e);
 });
