@@ -15,6 +15,7 @@
 
 
 
+
 // create map object
 
 // setView: [lat, long], zoom level 
@@ -26,6 +27,7 @@ var mapIcons = setMediumIcons();
 
 // -------------------------------------
 // clustergroup playground
+// (this is terrible hacking that just happens to work, needs serious refactoring)
 
 // loading markers as ClusterGroups
 var mainLayer = L.markerClusterGroup({
@@ -144,6 +146,8 @@ map.addLayer(mainLayer);
 
 
 // -------------------------------------
+
+
 
 
 
