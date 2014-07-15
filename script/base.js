@@ -49,8 +49,15 @@ function removeClass(elem, className) {
 
 
 // create map object
+
 // setView: [lat, long], zoom level 
 var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').setView([46, -107.215], 4);
+
+// fitBounds: [lat, long], [lat, long]
+// var map = L.mapbox.map('map', 'mezzoblue.map-0311vf6d').fitBounds(
+//     [60.846, -135.312], 
+//     [41.436, -52.317]
+//     );
 
 
 
@@ -68,6 +75,21 @@ var defunctLayer = L.mapbox.markerLayer()
 // then set one for default load
 var currentLayer = mainLayer;
 toggleLayers(currentLayer);
+
+
+// then resize map to fit
+currentLayer.on('ready', function() {
+    // currentLayer.getBounds() returns the corners of the furthest-out markers,
+    // and map.fitBounds() makes sure that the map contains these.
+    map.fitBounds(
+        currentLayer.getBounds(),
+        {
+            // preserves the space from the left of the real map to account
+            // for UI layer
+            paddingTopLeft: [300, 0]
+        }
+        );
+});
 
 
 
@@ -146,7 +168,6 @@ function toggleLayers(layer) {
     map.addLayer(layer);
     map.invalidateSize(false);
 }
-
 
 
 
