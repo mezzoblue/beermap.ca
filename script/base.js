@@ -259,7 +259,7 @@ document.getElementById('nav-defunct').onclick = function() {
 
 // add collapse widget
 var navPanel = document.getElementById('site-header');
-addHTML(navPanel, "<div class='nav-collapse' id='nav-collapse'>*</div>", "beforebegin");
+addHTML(navPanel, "<div class='nav-collapse' id='nav-collapse'></div>", "beforebegin");
 
 // wire up collapse widget click handler
 document.getElementById('nav-collapse').onclick = function() {
