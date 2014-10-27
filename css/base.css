@@ -62,7 +62,6 @@ body {
 .site-nav {
 	padding: 0;
 }
-
 	.nav-item {
 		display: block;
 		padding: 1px 0;
@@ -71,20 +70,29 @@ body {
 		text-align: left;
 		list-style: none;
 	}
-	.nav-link {
+	.nav-item a {
 		display: block;
-		padding: 11px 5px 9px 5px;
-		border-radius: 4px;
-		color: #999;
+		position: relative;
+		padding: 5px 10px 5px 25px;
+		margin: 0;
+		border-radius: 2px;
+		color: #ccc;
+		font-size: 0.9rem;
 		text-decoration: none;
-		text-transform: uppercase;
 	}
-	.nav-link:hover, .nav-link:focus {
-		background: #f9f9f9;
+	.nav-item a::before {
+		content: '\25CB';
+		position: absolute;
+		left: 10px;
 	}
-	.nav-link.active {
+	.nav-item a.active {
 		color: #777;
-		background: #ddd;
+	}
+	.nav-item a.active::before {
+		content: '\25CF';
+	}
+	.nav-item a:hover, .nav-item a:focus {
+		color: #222;
 	}
 
 .nav-collapse {
@@ -107,13 +115,13 @@ body {
 	user-select: none;
 }
 	.nav-collapse::before {
-		content: '\25B6';
+		content: '\25C0';
 		line-height: 28px;
 		font-size: 13px;
 		text-shadow: #ccc 1px 1px 0;
 	}
 	.nav-collapse.collapsed::before {
-		content: '\25C0';
+		content: '\25B6';
 	}
 	.nav-collapse:hover {
 		background: #f4f4f4;
@@ -128,6 +136,7 @@ body {
 	text-align: left;
 }
 	.map-legend li {
+		font-size: 0.8rem;
 		display: block;
 		padding: 5px 0;
 		margin: 0;
@@ -357,28 +366,24 @@ li.closed {
 		left: 20px;
 		width: 280px;
 		min-height: 90%;
-		border-radius: 8px;
+		border-radius: 4px;
 
 		font-size: 1.2rem;
 	}
 
 	.site-nav {
-		padding: 30px 0;
-	}
-	.nav-item {
-		padding: 5px 10px;
+		padding: 20px 0;
 	}
 	.nav-link {
 		display: block;
-		padding: 14px 20px 12px 20px;
 	}
 
 	.map-legend {
-		padding-top: 40px;
+		padding-top: 20px;
 	}
 	.map-legend li {
 		display: block;
-		padding-left: 27px;
+		padding-left: 7px;
 	}
 
 	.leaflet-left .leaflet-control {
