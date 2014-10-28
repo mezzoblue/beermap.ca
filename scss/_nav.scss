@@ -1,0 +1,121 @@
+/* navigation styling */
+
+.site-header, .nav-collapse, .map .leaflet-top {
+	-webkit-transition: -webkit-transform 0.25s ease-out;
+	-moz-transition: -moz-transform 0.25s ease-out;
+	transition: transform 0.25s ease-out;
+}
+	.site-header.collapsed, .nav-collapse.collapsed, .map.collapsed .leaflet-top {
+		-webkit-transition: -webkit-transform 0.25s ease-out;
+		-moz-transition: -moz-transform 0.25s ease-out;
+		transition: transform 0.25s ease-out;
+
+		-webkit-transform: translate(-300px, 0);
+		-moz-transform: translate(-300px, 0);
+		transform: translate(-300px, 0);
+	}
+
+.site-nav {
+	padding: 0;
+}
+	.nav-item {
+		display: block;
+		padding: 1px 0;
+		margin: 0;
+		line-height: 1;
+		text-align: left;
+		list-style: none;
+		a {
+			display: block;
+			position: relative;
+			padding: 5px 10px 5px 25px;
+			margin: 0;
+			border-radius: 2px;
+			color: #ccc;
+			font-size: 0.9rem;
+			text-decoration: none;
+			&::before {
+				content: '\25CB';
+				position: absolute;
+				left: 10px;
+			}
+			&.active {
+				color: #777;
+				&::before {
+					content: '\25CF';
+				}
+			}
+			&:hover, &:focus {
+				color: #222;
+			}
+		}
+	}
+
+.nav-collapse {
+	position: absolute;
+	z-index: 100;
+	top: 90px;
+	left: 310px;
+
+	width: 28px;
+	height: 28px;
+	border: solid 1px #ccc;
+	border-radius: 3px;
+	color: #000;
+	background: #fff;
+	text-align: center;
+
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+
+	&::before {
+		content: '\25C0';
+		line-height: 28px;
+		font-size: 13px;
+		text-shadow: #ccc 1px 1px 0;
+	}
+	&.collapsed::before {
+		content: '\25B6';
+	}
+	&:hover {
+		background: #f4f4f4;
+	}
+
+}
+
+
+
+
+/* small tablet / mobile layout */
+@media all and (max-width: 767px) {
+
+	.nav-collapse {
+		top: 70px;
+		left: auto;
+		right: 5px;
+	}
+	.site-header.collapsed {
+		-webkit-transform: translate(-180px, 0);
+		-moz-transform: translate(-180px, 0);
+		transform: translate(-180px, 0);
+	}
+	.nav-collapse.collapsed, .map.collapsed .leaflet-top {
+		-webkit-transform: none;
+		-moz-transform: none;
+		transform: none;
+	}
+}
+
+/* desktop layout */
+@media all and (min-width: 768px) {
+
+	.site-nav {
+		padding: 20px 0;
+	}
+	.nav-link {
+		display: block;
+	}
+
+}

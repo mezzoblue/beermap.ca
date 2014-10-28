@@ -1,0 +1,102 @@
+
+/* header */
+
+.site-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+
+	padding: 10px 10px 6rem 10px;
+	background: #fff;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 3px 12px;
+
+	text-align: center;
+}
+	.site-title {
+		padding: 7px 0 7px 22px;
+		background: url(../images/logo-pint.png) no-repeat;
+		background-size: 32px;
+		font-family: 'Julius Sans One', sans-serif;
+		text-transform: uppercase;
+	}
+
+/* site credits */
+
+.site-credits {
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+
+	width: 100%;
+
+	color: #bbb;
+	font-size: 0.8rem;
+	text-align: center;
+
+	p {
+		margin: 10px 0;
+	}
+	a:link, a:visited {
+		color: #bbb;
+	}
+}
+
+
+
+/* small tablet / mobile layout */
+@media all and (max-width: 767px) {
+
+	.site-header {
+		width: 180px;
+		min-height: 100%;
+
+		-webkit-transition: -webkit-transform 0.15s ease-out;
+		-moz-transition: -moz-transform 0.15s ease-out;
+		transition: transform 0.15s ease-out;
+	}
+
+	.site-title {
+		padding-left: 0;
+		background: none;
+	}
+
+}
+
+
+/* mobile layout */
+@media all and (max-width: 480px) {
+
+	.site-header {
+		max-width: 120px;
+		min-width: 0;
+
+		-webkit-transition: -webkit-transform 0.1s ease-out;
+		-moz-transition: -moz-transform 0.1s ease-out;
+		transition: transform 0.1s ease-out;
+
+		&.collapsed {
+			-webkit-transform: translate(-120px, 0);
+			-moz-transform: translate(-120px, 0);
+			transform: translate(-120px, 0);
+		}
+	}
+
+}
+
+
+
+/* desktop layout */
+@media all and (min-width: 768px) {
+
+	.site-header {
+		top: 20px;
+		left: 20px;
+		width: 280px;
+		min-height: 90%;
+		border-radius: 4px;
+
+		font-size: 1.2rem;
+	}
+
+}
