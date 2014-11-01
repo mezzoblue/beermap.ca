@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Craft Beer Canada">
+
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
+
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
+
+
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+  <link rel="stylesheet" href="css/base.css" />
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+	<div class="site-title">
+		Craft Beer Canada
+	</div>
+	<nav class="site-nav">
+		<ul id="nav">
+		</ul>
+	</nav>
+
+	<div class="map-legend">
+		<ul>
+			<li><img src="images/brewery.png">Brewery</li>
+			<li><img src="images/brewpub.png">Brewpub</li>
+			<li><img src="images/nano.png">Nanobrewery</li>
+			<li><img src="images/other.png">Other</li>
+		</ul>
+	</div>
+
+	<div class="site-credits">
+		<p>By <a href="https://twitter.com/mezzoblue">@mezzoblue</a></p>
+		<p><a href="https://github.com/mezzoblue/canadian-craft-breweries">Contribute?</a></p>
+	</div>
+
+	<a href="#" id="site-header-toggle"></a>
+
+</header>
+
+
+<div id="map" class="map"></div>
+
+
+<script src='http://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+
+<script type="text/javascript" src="script/functions/jqueryish.js"></script>
+<script type="text/javascript" src="script/functions/json.js"></script>
+<script type="text/javascript" src="script/functions/map.js"></script>
+<script type="text/javascript" src="script/functions/ui.js"></script>
+<script type="text/javascript" src="script/base.js"></script>
+</body>
+</html>
