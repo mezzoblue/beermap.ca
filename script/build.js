@@ -193,7 +193,7 @@ function createLayer(layer, name, nav, addNow) {
         if (addNow) {
             link.className = 'active';
         }
-        link.innerHTML = name;
+        link.innerHTML = name + " (" + layer.features.length + ")";
 
     // add click handler to toggle the link's layer
     link.onclick = function(e) {
