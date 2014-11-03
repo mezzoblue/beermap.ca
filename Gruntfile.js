@@ -36,4 +36,10 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['concat']);
   grunt.registerTask('min', ['uglify']);
 
+  // create build task
+  grunt.registerTask('build', [
+    'concat',
+    'uglify'
+  ]);
+
 };
